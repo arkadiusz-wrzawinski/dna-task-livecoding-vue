@@ -1,22 +1,21 @@
 <script setup lang="ts">
-defineProps({
-  value: {
-    type: Number,
-    required: true,
-  },
-  currencySign: {
-    type: String,
-    required: true,
-  },
-  label: {
-    type: String,
-    required: true,
-  }
-})
+import DashboardBox from '@/components/DashboardBox.vue'
+
+const { currencySign, value, label, prefix } = defineProps<{
+  currencySign: string
+  value: number
+  label: string
+  prefix?: boolean
+}>()
 </script>
 
 <template>
-  <div class="dashboard-box">
-    <span>{{ value }}{{ currencySign }}</span> {{ label }}
-  </div>
+  <DashboardBox>
+    <template #value>
+      <span>{{ prefix ? currencySign : '' }}{{ value }}{{ !prefix ? currencySign : '' }}</span>
+    </template>
+    <template #label>
+      {{ label }}
+    </template>
+  </DashboardBox>
 </template>

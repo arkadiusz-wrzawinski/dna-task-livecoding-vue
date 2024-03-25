@@ -1,22 +1,19 @@
-<script lang="ts">
-import type { PropType } from 'vue';
+<script setup lang="ts">
+import DashboardBox from '@/components/DashboardBox.vue'
 
-export default {
-  props: {
-    value: {
-      type: Number as PropType<number>,
-      required: true,
-    },
-    label: {
-      type: String as PropType<string>,
-      required: true,
-    }
-  }
-}
+const { value, label } = defineProps<{
+  value: number
+  label: string
+}>()
 </script>
 
 <template>
-  <div class="dashboard-box">
-    <span>{{ value }}</span> {{ label }}
-  </div>
+  <DashboardBox>
+    <template #value>
+      <span>{{ value }}</span>
+    </template>
+    <template #label>
+      {{ label }}
+    </template>
+  </DashboardBox>
 </template>
